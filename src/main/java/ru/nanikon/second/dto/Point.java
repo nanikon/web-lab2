@@ -1,4 +1,4 @@
-package ru.nanikon.second.service.model;
+package ru.nanikon.second.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

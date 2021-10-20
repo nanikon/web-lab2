@@ -15,19 +15,20 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <title>Первый бой</title>
 </head>
-<body>
+<body onload='{drawSvg(<c:out value="${applicationScope.get(header['User-Agent']).jsonPoint}"/>)}'>
 <header>
     <p>
         Натворила: Никонова Наталья Игоревна<br>
         Группа: P3212<br>
-        Вариант: 12014<br>
+        Вариант: 52583<br>
     </p>
 </header>
 <main role="main">
     <h1>Виртуальный тир: испытай свою меткость!</h1>
     <div class="blocks">
         <div>
-            <img src="img/fieldBlue.PNG" alt="field">
+            <div id="svg"></div>
+            <!--<img src="img/fieldBlue.PNG" alt="field">-->
         </div>
         <div>
             <div class="to-form">
@@ -39,7 +40,7 @@
                     </p>
                     <p id="y-input">
                         Координата точки Y: <br>
-                        <label><input type="checkbox" name="y[]" value="-4"> -4 </label> <br>
+                        <label><input type="checkbox" name="y[]" id = "y" value="-4"> -4 </label> <br>
                         <label><input type="checkbox" name="y[]" value="-3"> -3 </label> <br>
                         <label><input type="checkbox" name="y[]" value="-2"> -2 </label> <br>
                         <label><input type="checkbox" name="y[]" value="-1"> -1 </label> <br>
@@ -53,7 +54,7 @@
                     <p id="r-input">
                         Радиус области R: <br>
                         <label><input type="checkbox" name="r[]" value="1"> 1 </label> <br>
-                        <label><input type="checkbox" name="r[]" value="2"> 2 </label> <br>
+                        <label><input type="checkbox" name="r[]" value="2" checked> 2 </label> <br>
                         <label><input type="checkbox" name="r[]" value="3"> 3 </label> <br>
                         <label><input type="checkbox" name="r[]" value="4"> 4 </label> <br>
                         <label><input type="checkbox" name="r[]" value="5"> 5 </label> <br>
@@ -67,7 +68,7 @@
     <h2>Результаты:</h2>
     <div id="result-table">
         <c:choose>
-            <c:when test="${applicationScope.get(header['User-Agent']) == null}">
+            <c:when test="${applicationScope.get(header['User-Agent']).listPoint == null}">
                 <h3>Вы пока не отправили ни один результат</h3>
             </c:when>
             <c:otherwise>
@@ -81,7 +82,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="point" items="${applicationScope.get(header['User-Agent']) }">
+                    <c:forEach var="point" items="${applicationScope.get(header['User-Agent']).listPoint }">
                         <tr>
                             <td>${point.x}</td>
                             <td>${point.y}</td>
@@ -95,6 +96,8 @@
         </c:choose>
     </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
 <script type="text/javascript" src="js/validator.js"></script>
+<script type="text/javascript" src="js/SvgDrawer.js"></script>
 </body>
 </html>

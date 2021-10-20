@@ -1,5 +1,8 @@
 package ru.nanikon.second.servlet;
 
+import ru.nanikon.second.dto.Answer;
+import ru.nanikon.second.dto.Point;
+import ru.nanikon.second.parser.AnswerJsonParser;
 import ru.nanikon.second.service.AreaService;
 import ru.nanikon.second.service.model.*;
 
@@ -10,8 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Natalia Nikonova
@@ -19,6 +20,8 @@ import java.util.List;
 public class AreaCheckServlet extends HttpServlet {
     @Inject
     private AreaService areaService;
+    @Inject
+    private AnswerJsonParser parser;
 
     @PostConstruct
     public void configArea() {
@@ -28,11 +31,12 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Point> pointList;
-        if (getServletContext().getAttribute(req.getHeader("User-Agent")) == null) {
-            pointList = new ArrayList<>();
+        Answer answer;
+        String key = req.getHeader("User-Agent");
+        if (getServletContext().getAttribute(key) == null) {
+            answer = new Answer();
         } else {
-            pointList = (ArrayList<Point>) getServletContext().getAttribute(req.getHeader("User-Agent"));
+            answer = (Answer) getServletContext().getAttribute(key);
         }
         double x = Double.parseDouble(req.getParameter("x"));
         String[] yList = req.getParameterValues("y[]");
@@ -41,13 +45,14 @@ public class AreaCheckServlet extends HttpServlet {
             double y = Double.parseDouble(yStr);
             for (String rStr : rList) {
                 double r = Double.parseDouble(rStr);
-                pointList.add(new Point(x, y, r, areaService.checkArea(x, y, r) ? "Попали" : "Не попали"));
-                getServletContext().setAttribute(req.getHeader("User-Agent"), pointList);
+                answer.addPoint(new Point(x, y, r, areaService.checkArea(x, y, r) ? "Попали" : "Не попали"));
             }
         }
-        for (Point point : pointList) {
+        for (Point point : answer.getListPoint()) {
             System.out.printf("%s %s %s %s%n", point.getX(), point.getY(), point.getR(), point.getIsHit());
         }
+        answer.setJsonPoint(parser.fromObjectToJson(answer));
+        getServletContext().setAttribute(key, answer);
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }
