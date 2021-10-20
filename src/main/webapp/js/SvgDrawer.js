@@ -1,12 +1,12 @@
-let WIDTH = 1000;
-let HEIGHT = 1000;
+let WIDTH = 400;
+let HEIGHT = 400;
 const X_CENTER = 0;
 const Y_CENTER = 0;
 const BACKGROUND_COLOR = '#fff';
 let CANVAS = null;
 const AXES_COLOR = '#000'
 const AREA_COLOR = '#AF412D';
-let scale = 0.020;
+let scale = 0.035;
 const scaleLastPoint = 10;
 const pointsScale = 5;
 
@@ -100,8 +100,8 @@ countScale = (pointsArray) => {
                 scale;
     });
     console.log('scale = ' + newScale)
-    // return newScale;
-    return 0.020;
+    //return newScale;
+    return 0.035;
 }
 
 drawAxes = () => {
@@ -237,8 +237,8 @@ function getCoords(event, element) {
     let svg = document.getElementById("svg");
     WIDTH = svg.getBoundingClientRect().width;
     HEIGHT = svg.getBoundingClientRect().height;
-    coordinates.x = convertToCoordinatesX(event.clientX - xPosition);
-    coordinates.y = Math.round(convertToCoordinatesY(event.clientY - yPosition));
+    coordinates.x = Math.floor(convertToCoordinatesX(event.clientX - xPosition));
+    coordinates.y = Math.floor(convertToCoordinatesY(event.clientY - yPosition));
     coordinates.r = parseInt(getR());
     console.log('X: ' + coordinates.x);
     console.log('Y: ' + coordinates.y);

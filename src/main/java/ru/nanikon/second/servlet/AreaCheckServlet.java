@@ -48,9 +48,6 @@ public class AreaCheckServlet extends HttpServlet {
                 answer.addPoint(new Point(x, y, r, areaService.checkArea(x, y, r) ? "Попали" : "Не попали"));
             }
         }
-        for (Point point : answer.getListPoint()) {
-            System.out.printf("%s %s %s %s%n", point.getX(), point.getY(), point.getR(), point.getIsHit());
-        }
         answer.setJsonPoint(parser.fromObjectToJson(answer));
         getServletContext().setAttribute(key, answer);
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);

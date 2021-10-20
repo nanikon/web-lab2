@@ -14,9 +14,6 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getParameter("x"));
-        System.out.println(Arrays.toString(req.getParameterValues("y[]")));
-        System.out.println(Arrays.toString(req.getParameterValues("r[]")));
         if ((req.getParameter("x") == null)
                 || (req.getParameterValues("y[]") == null)
                 || (req.getParameterValues("r[]") == null)) {
