@@ -31,11 +31,11 @@
         </div>
         <div>
             <div class="to-form">
-                <form id="input-data" method="get">
+                <form id="input-data" class="form" method="get">
                     <p id="x-input">
                         Координата точки X: <br>
-                        <label><input type="text" name="x"></label> <br>
-                        <span class="hide">Х должна быть числом между [-3, 5]</span>
+                        <label><input type="text" name="x" id="x" maxlength="13"></label> <br>
+                        <span class="hide" id="x-error">Х должна быть числом между [-3, 5]</span>
                     </p>
                     <p id="y-input">
                         Координата точки Y: <br>
@@ -48,7 +48,7 @@
                         <label><input type="checkbox" name="y[]" value="2"> 2 </label> <br>
                         <label><input type="checkbox" name="y[]" value="3"> 3 </label> <br>
                         <label><input type="checkbox" name="y[]" value="4"> 4 </label> <br>
-                        <span class="hide">Y должно быть выбрано одно только одно и лишь из представленных здесь</span>
+                        <span class="hide" id="y-error">Y должно быть выбрано одно только одно и лишь из представленных здесь</span>
                     </p>
                     <p id="r-input">
                         Радиус области R: <br>
@@ -57,9 +57,9 @@
                         <label><input type="checkbox" name="r[]" value="3"> 3 </label> <br>
                         <label><input type="checkbox" name="r[]" value="4"> 4 </label> <br>
                         <label><input type="checkbox" name="r[]" value="5"> 5 </label> <br>
-                        <span class="hide">R должно быть выбрано только одно и лишь из представленных здесь</span>
+                        <span class="hide" id="r-error">R должно быть выбрано только одно и лишь из представленных здесь</span>
                     </p>
-                    <p><input type="submit" value="Отправить" id="submit"></p>
+                    <p><input type="submit" value="Отправить" id="bthSubmit" onclick="validateForm(event)"></p>
                 </form>
             </div>
         </div>
@@ -68,7 +68,6 @@
     <div id="result-table">
         <c:choose>
             <c:when test="${applicationScope.get(header['User-Agent']) == null}">
-            <%--<c:when test="${applicationScope.header['User-Agent'] == null}">--%>
                 <h3>Вы пока не отправили ни один результат</h3>
             </c:when>
             <c:otherwise>
@@ -96,5 +95,6 @@
         </c:choose>
     </div>
 </main>
+<script type="text/javascript" src="js/validator.js"></script>
 </body>
 </html>

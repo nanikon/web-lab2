@@ -111,7 +111,7 @@ input[type="button"]:hover {
 input[type="button"].active {
     background-color: var(--pressed-button-color);
 }
-input#submit {
+input#bthSubmit {
     font-size: 18px;
     width: 110px;
     padding: 8px;
@@ -120,7 +120,7 @@ input#submit {
     border-radius: 5px;
     border: 0;
 }
-input#submit:hover {
+input#bthSubmit:hover {
     background-color: var(--pressed-button-color);
 }
 span {
