@@ -7,14 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-    pageContext.setAttribute("currentUserData", application.getAttribute(request.getHeader("User-Agent")));
-%>
 
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <title>Первый бой</title>
 </head>
 <body>
@@ -29,7 +27,7 @@
     <h1>Виртуальный тир: испытай свою меткость!</h1>
     <div class="blocks">
         <div>
-            <img src="img/fieldRed.png" alt="field">
+            <img src="img/fieldBlue.PNG" alt="field">
         </div>
         <div>
             <div class="to-form">
@@ -41,15 +39,15 @@
                     </p>
                     <p id="y-input">
                         Координата точки Y: <br>
-                        <label><input type="button" name="y" value="-2"></label>
-                        <label><input type="button" name="y" value="-1.5"></label>
-                        <label><input type="button" name="y" value="-1"></label>
-                        <label><input type="button" name="y" value="-0.5"></label>
-                        <label><input type="button" name="y" value="0"></label>
-                        <label><input type="button" name="y" value="0.5"></label>
-                        <label><input type="button" name="y" value="1"></label>
-                        <label><input type="button" name="y" value="1.5"></label>
-                        <label><input type="button" name="y" value="2"></label> <br>
+                        <label><input type="checkbox" name="y[]" value="-4"> -4 </label> <br>
+                        <label><input type="checkbox" name="y[]" value="-3"> -3 </label> <br>
+                        <label><input type="checkbox" name="y[]" value="-2"> -2 </label> <br>
+                        <label><input type="checkbox" name="y[]" value="-1"> -1 </label> <br>
+                        <label><input type="checkbox" name="y[]" value="0"> 0 </label> <br>
+                        <label><input type="checkbox" name="y[]" value="1"> 1 </label> <br>
+                        <label><input type="checkbox" name="y[]" value="2"> 2 </label> <br>
+                        <label><input type="checkbox" name="y[]" value="3"> 3 </label> <br>
+                        <label><input type="checkbox" name="y[]" value="4"> 4 </label> <br>
                         <span class="hide">Y должно быть выбрано одно только одно и лишь из представленных здесь</span>
                     </p>
                     <p id="r-input">
@@ -69,7 +67,8 @@
     <h2>Результаты:</h2>
     <div id="result-table">
         <c:choose>
-            <c:when test="${applicationScope.header['User-Agent'] == null}">
+            <c:when test="${applicationScope.get(header['User-Agent']) == null}">
+            <%--<c:when test="${applicationScope.header['User-Agent'] == null}">--%>
                 <h3>Вы пока не отправили ни один результат</h3>
             </c:when>
             <c:otherwise>
@@ -83,7 +82,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="point" items="${currentUserData}">
+                    <c:forEach var="point" items="${applicationScope.get(header['User-Agent']) }">
                         <tr>
                             <td>${point.x}</td>
                             <td>${point.y}</td>

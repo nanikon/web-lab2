@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * @author Natalia Nikonova
@@ -13,10 +14,15 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if ((req.getAttribute("x") == null) || (req.getAttribute("y") == null) || (req.getAttribute("r") == null)) {
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        System.out.println(req.getParameter("x"));
+        System.out.println(Arrays.toString(req.getParameterValues("y[]")));
+        System.out.println(Arrays.toString(req.getParameterValues("r[]")));
+        if ((req.getParameter("x") == null)
+                || (req.getParameterValues("y[]") == null)
+                || (req.getParameterValues("r[]") == null)) {
+            getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
         } else {
-            req.getRequestDispatcher("/check").forward(req, resp);
+            getServletContext().getRequestDispatcher("/check").forward(req, resp);
         }
     }
 }
