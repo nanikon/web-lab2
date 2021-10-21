@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-    <title>Первый бой</title>
+    <title>Второй бой</title>
 </head>
 <body onload='{drawSvg(<c:out value="${applicationScope.get(header['User-Agent']).jsonPoint}"/>)}'>
 <header>
