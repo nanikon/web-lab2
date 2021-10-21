@@ -15,8 +15,11 @@ public class Answer implements Serializable {
     private List<Point> listPoint = new ArrayList<>();
     @Getter @Setter
     private String jsonPoint = "";
+    @Getter @Setter
+    private Point lastPoint;
 
     public void addPoint(Point point) {
         listPoint.add(point);
+        lastPoint = point;
     }
 }

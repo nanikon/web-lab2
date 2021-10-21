@@ -50,6 +50,6 @@ public class AreaCheckServlet extends HttpServlet {
         }
         answer.setJsonPoint(parser.fromObjectToJson(answer));
         getServletContext().setAttribute(key, answer);
-        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/result.jsp").forward(req, resp);
     }
 }

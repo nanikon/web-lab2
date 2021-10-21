@@ -97,7 +97,7 @@ form * {
 form > * {
     margin: 1%;
 }
-input[type="button"] {
+input[type="button"], div.for_link {
     width: 60px;
     background-color: var(--basic-button-color);
     color: white;
@@ -129,4 +129,13 @@ span {
 }
 span.hide {
     display: none;
+}
+div.for_link {
+    margin: auto;
+    width: 170px;
+    padding: 10px;
+}
+div a {
+    text-decoration: none;
+    color: white;
 }
